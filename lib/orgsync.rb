@@ -18,8 +18,9 @@ module OrgSync
       
       default_params = {:key => key}
       params = default_params.merge(params)
-      
-      url  = "#{endpoint}#{path}?#{params.to_query}"
+      query  = params.each_pair.map { |k,v| "#{k}=#{v}" }.join('&')
+
+      url  = "#{endpoint}#{path}?#{query}"
       uri  = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
   
@@ -65,7 +66,7 @@ module OrgSync
     end
     
     def self.find(id, params, key)
-      if id.blank?
+      if id.nil?
         raise "Cannot find #{self.class.split('::').last} without id" 
       else
         if id == :all
@@ -121,7 +122,7 @@ module OrgSync
     # These accounts then needs to be cross referenced with their 
     # Membership Logs for this Organization.
     def accounts
-      return [] if self.id.blank?
+      return [] if self.id.nil?
       @accounts ||= 
         OrgSync::Base.request("#{self.class.endpoint}/#{self.id}/accounts", {}, @api_key).map { |json| 
           OrgSync::Account.new(json, @api_key) 
@@ -139,7 +140,7 @@ module OrgSync
     end
     
     def organizations
-      return [] if self.id.blank?
+      return [] if self.id.nil?
       reload unless respond_to?(:org_ids)
       # Oddly, there is no API call for getting a list of organizations given 
       # an Account, so, we have to load them all one by one like this...
@@ -152,7 +153,7 @@ module OrgSync
     # Returns membership logs in order of the date they were created
     def membership_logs(org = nil)
       @membership_logs ||= {}
-      key = org.blank? ? :all : org.id
+      key = org.nil? ? :all : org.id
       
       params = {:account_id => self.id}
       params = params.merge({:org_id => org.id}) if org
