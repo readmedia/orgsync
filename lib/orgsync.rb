@@ -2,6 +2,7 @@ require "orgsync/version"
 require 'open-uri'
 require 'openssl'
 require 'base64'
+require 'json'
 
 #
 # Simple API wrapper for OrgSync; see: https://orgsync.com/api/docs/v2/
