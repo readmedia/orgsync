@@ -21,7 +21,7 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-API_KEY = <your-api-key>
+API_KEY = "<orgsync-api-key>"
 
 # Get all clubs or activities (OrgSync calls these Organizations)
 org_list = OrgSync::Organization.find(:all, {}, API_KEY)
@@ -32,7 +32,7 @@ org_list.each do |org|
   
     # Get all join and leave events for this member in this organization (OrgSync's Membership Logs)
     acct.membership_logs.each do |log|
-      ...
+      # ...
     end
   end
 end
