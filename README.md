@@ -1,6 +1,6 @@
 # Orgsync
 
-TODO: Write a gem description
+A simple API wrapper for the OrgSync API.
 
 ## Installation
 
@@ -20,7 +20,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+API_KEY = <your-api-key>
+
+# Get all clubs or activities (OrgSync calls these Organizations)
+org_list = OrgSync::Organization.find(:all, {}, API_KEY)
+org_list.each do |org|
+
+  # Get all members of this organization (OrgSync calls these Accounts)
+  org.accounts.each do |acct|
+  
+    # Get all join and leave events for this member in this organization (OrgSync's Membership Logs)
+    acct.membership_logs.each do |log|
+      ...
+    end
+  end
+end
+```
+
+See `example.rb` for a script that retrieves all clubs and activities, and generates rosters for those activities.
 
 ## Contributing
 
