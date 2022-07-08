@@ -47,3 +47,7 @@ See `example.rb` for a script that retrieves all clubs and activities, and gener
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+
+## Archived
+This repository was archived on 2022-07-08 since it is no longer in development, has never been forked, and is no longer used by the author(s).
